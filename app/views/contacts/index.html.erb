@@ -1,0 +1,26 @@
+<% title "Contacts" %>
+
+<div id='container' ng-controller="contactControl">
+  <div id="contact-nav" class="section">
+    <div class="action">
+      <button class="btn btn-success new-button" ng-click="newContact()">+ New Contact</button>
+    </div>
+    <div id="contacts"></div>
+  </div>
+
+  <div id="contact-details" ng-switch on="state" class="section">
+    <div id="instructions" ng-switch-when="start">
+      <p>
+        Create a <a href="" ng-click="newContact()">new contact</a> or select an existing contact from the left to get started.
+      </p>
+    </div>
+
+    <div id="details" ng-switch-when="viewing">View</div>
+
+    <div id="editor" ng-switch-when="editing">
+      <editor></editor>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "contacts" %>
