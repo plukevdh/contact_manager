@@ -1,0 +1,23 @@
+#= depend_on_asset "editor.html"
+
+ContactApp = angular.module('ContactApp', ['ngResource'])
+
+
+ContactApp.config ($httpProvider) ->
+  authToken = $("meta[name=\"csrf-token\"]").attr("content")
+  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+
+
+ContactApp.controller 'contactControl', ($scope) ->
+    $scope.state = "start"
+
+    $scope.newContact = ->
+      $scope.showEditor()
+
+    $scope.showEditor = ->
+      $scope.state = "editing"
+
+
+ContactApp.directive 'editor', () ->
+  restrict: 'E',
+  templateUrl: '<%= asset_path("editor.html") %>'

@@ -1,0 +1,40 @@
+@sidebarSize: 250px;
+
+.section {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#contact-nav {
+  height: 100%;
+  position: absolute;
+
+  width: @sidebarSize;
+  border-right: 1px solid #ddd;
+  background-color: #eee;
+
+  .action {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+
+    .new-button {
+      width: 100%;
+    }
+  }
+}
+
+#contact-details {
+  margin-left: @sidebarSize;
+
+  #instructions {
+    font-size: 28pt;
+    line-height: 28pt;
+    color: #aaa;
+    text-align: center;
+
+    p {
+      width: 600px;
+      margin-left: 200px;
+    }
+  }
+}
