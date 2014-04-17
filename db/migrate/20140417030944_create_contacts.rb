@@ -13,7 +13,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :street
       t.string :city
       t.string :state
-      t.integer :zip
+      t.integer :postcode
 
       t.timestamps
     end

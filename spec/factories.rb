@@ -6,7 +6,7 @@ FactoryGirl.define do
     street "70 Sugar Maple St."
     city "Bluffton"
     state "SC"
-    zip 29910
+    postcode 29910
     sex 25
     birthday 15.years.ago
     phone "843-321-9507"

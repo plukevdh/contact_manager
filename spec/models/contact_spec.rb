@@ -20,6 +20,30 @@ describe Contact do
     end
   end
 
+  context "address" do
+    When(:contact) { build(:contact, address: {street: "123 Homily Street", city: "BBQ", state: "SC", postcode: "12345" })}
+
+    context "can parse a hash of params for an address" do
+      Then { contact.street.should == "123 Homily Street" }
+      And { contact.city.should == "BBQ" }
+      And { contact.state.should == "SC" }
+      And { contact.postcode.should == 12345 }
+    end
+
+    context "should allow addresses with missinginfo" do
+      When(:contact) { build(:contact, address: {street: "123 Homily Street"}) }
+      Then { expect(contact).to be_valid }
+      And { expect(contact.postcode).to be_nil }
+      And { expect(contact.street).to eq("123 Homily Street") }
+    end
+
+    context "should reject addressess with bad info" do
+      When(:contact) { build(:contact, postcode: "1234")}
+      Then { expect(contact).to_not be_valid }
+      And { expect(contact.errors[:postcode]).to_not be_nil }
+    end
+  end
+
   context "validations" do
     When(:contact) { build(:contact) }
 
@@ -33,6 +57,12 @@ describe Contact do
       When { contact.email = "biz@stone.com" }
       Then { contact.should_not be_valid }
       And { contact.errors[:email].should_not be_nil }
+    end
+
+    context "require 4 digit postcode" do
+      When { contact.postcode = "1234" }
+      Then { contact.should_not be_valid }
+      And { contact.errors[:postcode].should_not be_nil }
     end
   end
 
