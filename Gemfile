@@ -6,7 +6,7 @@ gem 'sqlite3'
 
 gem 'therubyracer',  platforms: :ruby
 gem 'less-rails'
-gem "twitter-bootstrap-rails", branch: "bootstrap3"
+gem "twitter-bootstrap-rails", git: "git://github.com/seyhunak/twitter-bootstrap-rails.git", branch: "bootstrap3"
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
