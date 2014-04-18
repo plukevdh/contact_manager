@@ -7,15 +7,48 @@ ContactApp.config ($httpProvider) ->
   authToken = $("meta[name=\"csrf-token\"]").attr("content")
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
+ContactApp.factory 'Contacts', ($resource) ->
+  class Contacts
+    constructor: ->
+      @service = $resource '/api/contacts/:id.json', {id: '@id'},
+        'update': { method:'PUT' }
 
-ContactApp.controller 'contactControl', ($scope) ->
-    $scope.state = "start"
+    all: ->
+      @service.query()
 
-    $scope.newContact = ->
-      $scope.showEditor()
+    update: (contact) ->
+      new @service.update({id: contact.id}, {contact: contact}).$promise
+        .then ((contact) -> console.log(contact)), ((error) -> console.log error)
 
-    $scope.showEditor = ->
-      $scope.state = "editing"
+      contact
+
+    create: (attrs) ->
+      new @service(contact: attrs).$save (contact) ->
+        attrs.id = contact.id
+      attrs
+
+ContactApp.controller 'contactControl', ($scope, Contacts) ->
+  $scope.init = ->
+    @service = new Contacts()
+    $scope.viewing = false
+    $scope.contacts = @service.all()
+
+  $scope.newContact = ->
+    $scope.showEditor()
+
+  $scope.save = (contact) ->
+    saved = if contact.id then @service.update(contact) else @service.create(contact)
+    $scope.showContact(saved)
+
+  $scope.showEditor = (contact) ->
+    $scope.viewing = true
+    $scope.editing = true
+    $scope.contact = contact
+
+  $scope.showContact = (contact) ->
+    $scope.viewing = true
+    $scope.editing = false
+    $scope.contact = contact
 
 
 ContactApp.directive 'editor', () ->

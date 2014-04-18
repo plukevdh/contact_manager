@@ -1,23 +1,28 @@
 <% title "Contacts" %>
 
-<div id='container' ng-controller="contactControl">
+<div id='container' ng-controller="contactControl" ng-init="init()">
   <div id="contact-nav" class="section">
     <div class="action">
-      <button class="btn btn-success new-button" ng-click="newContact()">+ New Contact</button>
+      <button class="btn btn-success new-button" ng-click="newContact()">
+        + New Contact
+      </button>
     </div>
-    <div id="contacts"></div>
+    <div id="contacts">
+      <div class="contact" ng-repeat="contact in contacts" ng-click="showContact(contact)">
+        {{contact.full_name}}
+        <i class="arrow fa fa-chevron-right"></i>
+      </div>
+    </div>
   </div>
 
-  <div id="contact-details" ng-switch on="state" class="section">
-    <div id="instructions" ng-switch-when="start">
+  <div id="contact-details" class="section">
+    <div id="instructions" ng-hide="viewing">
       <p>
         Create a <a href="" ng-click="newContact()">new contact</a> or select an existing contact from the left to get started.
       </p>
     </div>
 
-    <div id="details" ng-switch-when="viewing">View</div>
-
-    <div id="editor" ng-switch-when="editing">
+    <div id="editor" ng-show="viewing">
       <editor></editor>
     </div>
   </div>

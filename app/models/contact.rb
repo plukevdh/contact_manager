@@ -1,5 +1,5 @@
 class Contact < ActiveRecord::Base
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, allow_blank: false
   validates :postcode, length: { is: 5 }, allow_nil: true
 
   scope :alphabetical, -> { order(:last_name, :first_name) }
@@ -27,5 +27,9 @@ class Contact < ActiveRecord::Base
     VALID_ADDRESS_KEYS.each do |key|
       send "#{key}=", address_hash[key]
     end
+  end
+
+  def as_json(options={})
+    super options.merge(methods: [:full_name], except: [:first_name, :last_name])
   end
 end

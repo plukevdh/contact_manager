@@ -1,2 +1,62 @@
-<input type="text" ng-model="contact.full_name" placeholder="Contact Name">
-<hr/>
+<div id="name">
+  <input type="text" ng-show="editing" ng-model="contact.full_name" placeholder="Contact Name">
+  <div ng-hide="editing">
+    {{contact.full_name}}
+    <i class="edit fa fa-pencil" ng-click="showEditor(contact)"></i>
+  </div>
+</div>
+
+<div class="picture"></div>
+<div class="info">
+  <div class="personal">
+    <label for="sex">Sex</label>
+    <div id="sex" ng-hide="editing">{{contact.sex}}</div>
+    <select name="sex" ng-show="editing" ng-model="contact.sex">
+      <option>Please Select</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="age">Age</label>
+    <div id="age" ng-hide="editing">{{contact.age}}</div>
+    <input name="age" type="text" ng-model="contact.age" ng-show="editing">
+
+    <label for="birthday">Birthday</label>
+    <div id="birthday" ng-hide="editing">{{contact.birthday}}</div>
+    <input name="birthday" type="text" ng-model="contact.birthday" ng-show="editing">
+  </div>
+
+  <div class="address">
+    <label for="street">Street</label>
+    <div id="street" ng-hide="editing">{{contact.street}}</div>
+    <input name="street" type="text" ng-model="contact.street" ng-show="editing">
+
+    <label for="city">City</label>
+    <div id="city" ng-hide="editing">{{contact.city}}</div>
+    <input name="city" type="text" ng-model="contact.city" ng-show="editing">
+
+    <label for="state">State</label>
+    <div id="state" ng-hide="editing">{{contact.state}}</div>
+    <input name="state" type="text" ng-model="contact.state" ng-show="editing">
+
+    <label for="postcode">Zip</label>
+    <div id="postcode" ng-hide="editing">{{contact.postcode}}</div>
+    <input name="postcode" type="text" ng-model="contact.postcode" ng-show="editing">
+  </div>
+
+  <div class="contact">
+    <label for="phone">Phone</label>
+    <div id="phone" ng-hide="editing">{{contact.phone}}</div>
+    <input name="phone" type="text" ng-model="contact.phone" ng-show="editing">
+
+    <label for="email">Email</label>
+    <div id="email" ng-hide="editing">{{contact.email}}</div>
+    <input name="email" type="text" ng-model="contact.email" ng-show="editing">
+  </div>
+
+  <div class="save">
+    <button class="btn btn-success" ng-show="editing" ng-click="save(contact)">
+      Save Contact
+    </button>
+  </div>
+</div>

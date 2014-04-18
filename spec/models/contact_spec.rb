@@ -73,4 +73,10 @@ describe Contact do
     When(:ordered) { Contact.alphabetical }
     Then { ordered.map(&:full_name).should == ["Zoe Barnes", "Bill Stone", "Roger Stone"] }
   end
+
+  context "includes full name in json" do
+    Given(:contact) { build(:contact) }
+    When(:json) { contact.to_json }
+    Then { json.should include("\"full_name\":\"John Doe\"") }
+  end
 end
