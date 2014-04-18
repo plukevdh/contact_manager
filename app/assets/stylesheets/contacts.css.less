@@ -21,6 +21,26 @@
       width: 100%;
     }
   }
+
+  #contacts {
+    .contact {
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+
+      padding: 20px;
+      line-height: 16pt;
+      font-size: 16pt;
+
+      .arrow {
+        display: none;
+        float: right;
+      }
+      &:hover {
+        background: #ddd;
+        .arrow { display: inline; }
+      }
+    }
+  }
 }
 
 #contact-details {
@@ -35,6 +55,19 @@
     p {
       width: 600px;
       margin-left: 200px;
+    }
+  }
+
+  #editor {
+    #name {
+      padding: 10px;
+      font-size: 20pt;
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+
+      i {
+        margin-left: 15px;
+      }
     }
   }
 }
