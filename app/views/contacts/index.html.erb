@@ -8,8 +8,9 @@
       </button>
     </div>
     <div id="contacts">
-      <div class="contact" ng-repeat="contact in contacts" ng-click="showContact(contact)">
-        {{contact.full_name}}
+      <div class="contact" ng-repeat="contact in contacts | orderBy:['last_name','first_name']"
+        ng-click="showContact(contact)">
+        {{truncate(contact.full_name, 18)}}
         <i class="arrow fa fa-chevron-right"></i>
       </div>
     </div>

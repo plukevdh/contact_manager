@@ -18,12 +18,11 @@ ContactApp.factory 'Contacts', ($resource) ->
 
     update: (contact) ->
       new @service.update({id: contact.id}, {contact: contact}).$promise
-        .then ((contact) -> console.log(contact)), ((error) -> console.log error)
-
+        .then ((contact) -> ), ((error) -> console.log error)
       contact
 
     create: (attrs) ->
-      new @service(contact: attrs).$save (contact) ->
+      new @service({contact: attrs}).$save (contact) ->
         attrs.id = contact.id
       attrs
 
@@ -37,7 +36,13 @@ ContactApp.controller 'contactControl', ($scope, Contacts) ->
     $scope.showEditor()
 
   $scope.save = (contact) ->
-    saved = if contact.id then @service.update(contact) else @service.create(contact)
+    saved = if contact.id
+      @service.update(contact)
+    else
+      saved = @service.create(contact)
+      $scope.contacts.push saved
+      saved
+
     $scope.showContact(saved)
 
   $scope.showEditor = (contact) ->
@@ -49,6 +54,10 @@ ContactApp.controller 'contactControl', ($scope, Contacts) ->
     $scope.viewing = true
     $scope.editing = false
     $scope.contact = contact
+
+  $scope.truncate = (string, max) ->
+    return string if string.length <= max
+    string.substring(0, max-3) + "..."
 
 
 ContactApp.directive 'editor', () ->

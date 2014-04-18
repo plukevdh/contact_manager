@@ -10,7 +10,7 @@
 <div class="info">
   <div class="personal">
     <label for="sex">Sex</label>
-    <div id="sex" ng-hide="editing">{{contact.sex}}</div>
+    <span id="sex" ng-hide="editing">{{contact.sex}}</span>
     <select name="sex" ng-show="editing" ng-model="contact.sex">
       <option>Please Select</option>
       <option value="male">Male</option>
@@ -18,39 +18,39 @@
     </select>
 
     <label for="age">Age</label>
-    <div id="age" ng-hide="editing">{{contact.age}}</div>
+    <span id="age" ng-hide="editing">{{contact.age}}</span>
     <input name="age" type="text" ng-model="contact.age" ng-show="editing">
 
     <label for="birthday">Birthday</label>
-    <div id="birthday" ng-hide="editing">{{contact.birthday}}</div>
+    <span id="birthday" ng-hide="editing">{{contact.birthday}}</span>
     <input name="birthday" type="text" ng-model="contact.birthday" ng-show="editing">
   </div>
 
   <div class="address">
     <label for="street">Street</label>
-    <div id="street" ng-hide="editing">{{contact.street}}</div>
+    <span id="street" ng-hide="editing">{{contact.street}}</span>
     <input name="street" type="text" ng-model="contact.street" ng-show="editing">
 
     <label for="city">City</label>
-    <div id="city" ng-hide="editing">{{contact.city}}</div>
+    <span id="city" ng-hide="editing">{{contact.city}}</span>
     <input name="city" type="text" ng-model="contact.city" ng-show="editing">
 
     <label for="state">State</label>
-    <div id="state" ng-hide="editing">{{contact.state}}</div>
+    <span id="state" ng-hide="editing">{{contact.state}}</span>
     <input name="state" type="text" ng-model="contact.state" ng-show="editing">
 
     <label for="postcode">Zip</label>
-    <div id="postcode" ng-hide="editing">{{contact.postcode}}</div>
+    <span id="postcode" ng-hide="editing">{{contact.postcode}}</span>
     <input name="postcode" type="text" ng-model="contact.postcode" ng-show="editing">
   </div>
 
   <div class="contact">
     <label for="phone">Phone</label>
-    <div id="phone" ng-hide="editing">{{contact.phone}}</div>
+    <span id="phone" ng-hide="editing">{{contact.phone}}</span>
     <input name="phone" type="text" ng-model="contact.phone" ng-show="editing">
 
     <label for="email">Email</label>
-    <div id="email" ng-hide="editing">{{contact.email}}</div>
+    <span id="email" ng-hide="editing">{{contact.email}}</span>
     <input name="email" type="text" ng-model="contact.email" ng-show="editing">
   </div>
 

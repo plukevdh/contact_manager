@@ -30,6 +30,6 @@ class Contact < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super options.merge(methods: [:full_name], except: [:first_name, :last_name])
+    super options.merge(methods: [:full_name])
   end
 end
