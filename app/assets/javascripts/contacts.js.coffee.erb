@@ -10,8 +10,8 @@ ContactApp.config ($httpProvider) ->
 ContactApp.factory 'Contacts', ($resource) ->
   class Contacts
     constructor: ->
-      @service = $resource '/api/contacts/:id.json', {id: '@id'},
-        'update': { method:'PUT' }
+      @service = $resource '/api/contacts/:id', {id: '@id'},
+        'update': { method: 'PUT' }
 
     all: ->
       @service.query()
@@ -26,7 +26,7 @@ ContactApp.factory 'Contacts', ($resource) ->
         attrs.id = contact.id
       attrs
 
-ContactApp.controller 'contactControl', ($scope, Contacts) ->
+ContactApp.controller 'ContactControl', ($scope, Contacts) ->
   $scope.init = ->
     @service = new Contacts()
     $scope.viewing = false
