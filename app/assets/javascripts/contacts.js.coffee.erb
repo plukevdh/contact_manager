@@ -2,7 +2,6 @@
 
 ContactApp = angular.module('ContactApp', ['ngResource'])
 
-
 ContactApp.config ($httpProvider) ->
   authToken = $("meta[name=\"csrf-token\"]").attr("content")
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
@@ -30,6 +29,7 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
   $scope.init = ->
     @service = new Contacts()
     $scope.viewing = false
+    $scope.editing = false
     $scope.contacts = @service.all()
 
   $scope.newContact = ->
@@ -46,7 +46,7 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.showContact(saved)
 
   $scope.showEditor = (contact) ->
-    $scope.viewing = true
+    $scope.viewing = false
     $scope.editing = true
     $scope.contact = contact
 
@@ -58,7 +58,6 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
   $scope.truncate = (string, max) ->
     return string if string.length <= max
     string.substring(0, max-3) + "..."
-
 
 ContactApp.directive 'editor', () ->
   restrict: 'E',

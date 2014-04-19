@@ -17,13 +17,13 @@
   </div>
 
   <div id="contact-details" class="section">
-    <div id="instructions" ng-hide="viewing">
+    <div id="instructions" ng-show="!viewing && !editing">
       <p>
         Create a <a href="" ng-click="newContact()">new contact</a> or select an existing contact from the left to get started.
       </p>
     </div>
 
-    <div id="editor" ng-show="viewing">
+    <div id="editor" ng-show="viewing || editing">
       <editor></editor>
     </div>
   </div>
