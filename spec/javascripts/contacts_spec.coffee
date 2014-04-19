@@ -42,6 +42,28 @@ describe "ContactControl", ->
       expect(@scope).toBeEditing()
       expect(@scope.contact).toEqual dummy
 
+    describe "save", ->
+      it "should save a new record", ->
+        dummy = {full_name: "Bob Dylan", email: "bd@music.com"}
+        @scope.save dummy
+
+        @http.whenPOST("/api/contacts").respond(201, dummy)
+        @http.flush();
+
+        expect(@scope).toBeViewing()
+        expect(@scope.contacts.length).toEqual 3
+
+      it "should update an existing record", ->
+        dummy = @scope.contacts[0]
+        dummy.id = 7
+        @scope.save dummy
+
+        @http.whenPUT("/api/contacts/7").respond(204, dummy)
+        @http.flush();
+
+        expect(@scope).toBeViewing()
+        expect(@scope.contacts.length).toEqual 2
+
     describe "truncate", ->
       dummy = null
       beforeEach ->
