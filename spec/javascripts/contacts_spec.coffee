@@ -1,14 +1,13 @@
 #= require spec_helper
 
 describe "ContactControl", ->
-  contacts = []
-
   beforeEach ->
     @controller('ContactControl', { $scope: @scope })
     @Contact = @model('Contacts')
 
-    contacts.push new @Contact({full_name: "Busta Move"})
-    contacts.push new @Contact({full_name: "Sound Fury"})
+    @contacts = []
+    @contacts.push(new @Contact({full_name: "Busta Move"}))
+    @contacts.push(new @Contact({full_name: "Sound Fury"}))
 
     @scope.init()
 
@@ -21,7 +20,7 @@ describe "ContactControl", ->
       expect(@scope.editing).toBe false
 
     it "shows the selected contact", ->
-      dummy = contacts[0]
+      dummy = @scope.contacts[0]
       @scope.showContact(dummy)
 
       expect(@scope.viewing).toBe true
@@ -29,9 +28,27 @@ describe "ContactControl", ->
       expect(@scope.contact).toEqual dummy
 
     it "allows the contact to be edited", ->
-      dummy = contacts[1]
+      dummy = @scope.contacts[1]
       @scope.showEditor(dummy)
 
       expect(@scope.viewing).toBe false
       expect(@scope.editing).toBe true
       expect(@scope.contact).toEqual dummy
+
+    describe "truncate", ->
+      dummy = null
+      beforeEach ->
+        dummy = @scope.contacts[0]
+
+      it "don't bother strings under length", ->
+        text = @scope.truncate(dummy.full_name, 100)
+        expect(text).toEqual(dummy.full_name)
+
+      it "size with ellipses", ->
+        text = @scope.truncate(dummy.full_name, 5)
+
+        expect(text.length).toEqual(5)
+        expect(text).toEqual("Bu...")
+
+
+
