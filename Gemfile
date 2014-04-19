@@ -18,8 +18,6 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'spring',        group: :development
 
-gem 'unicorn'
-
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-given'
