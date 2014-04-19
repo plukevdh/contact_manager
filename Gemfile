@@ -4,6 +4,8 @@ gem 'rails', '4.1.0'
 
 gem 'sqlite3'
 
+gem 'angularjs-rails'
+
 gem 'therubyracer',  platforms: :ruby
 gem 'less-rails'
 gem "twitter-bootstrap-rails", git: "git://github.com/seyhunak/twitter-bootstrap-rails.git", branch: "bootstrap3"
