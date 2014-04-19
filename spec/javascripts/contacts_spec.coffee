@@ -2,6 +2,15 @@
 
 describe "ContactControl", ->
   beforeEach ->
+    jasmine.addMatchers
+      toBeViewing: ->
+        compare: (scope) ->
+          pass: scope.viewing == true && scope.editing == false
+      toBeEditing: ->
+        compare: (scope) ->
+          pass: scope.viewing == false && scope.editing == true
+
+  beforeEach ->
     @controller('ContactControl', { $scope: @scope })
     @Contact = @model('Contacts')
 
@@ -23,16 +32,14 @@ describe "ContactControl", ->
       dummy = @scope.contacts[0]
       @scope.showContact(dummy)
 
-      expect(@scope.viewing).toBe true
-      expect(@scope.editing).toBe false
+      expect(@scope).toBeViewing()
       expect(@scope.contact).toEqual dummy
 
     it "allows the contact to be edited", ->
       dummy = @scope.contacts[1]
       @scope.showEditor(dummy)
 
-      expect(@scope.viewing).toBe false
-      expect(@scope.editing).toBe true
+      expect(@scope).toBeEditing()
       expect(@scope.contact).toEqual dummy
 
     describe "truncate", ->
