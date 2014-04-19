@@ -7,43 +7,30 @@ ContactApp.config ($httpProvider) ->
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
 ContactApp.factory 'Contacts', ($resource) ->
-  class Contacts
-    constructor: ->
-      @service = $resource '/api/contacts/:id', {id: '@id'},
-        'update': { method: 'PUT' }
-
-    all: ->
-      @service.query()
-
-    update: (contact) ->
-      new @service.update({id: contact.id}, {contact: contact}).$promise
-        .then ((contact) -> ), ((error) -> console.log error)
-      contact
-
-    create: (attrs) ->
-      new @service({contact: attrs}).$save (contact) ->
-        attrs.id = contact.id
-      attrs
+    @service = $resource '/api/contacts/:id',
+      {id: '@id'}
+      update: { method: 'PUT' }
 
 ContactApp.controller 'ContactControl', ($scope, Contacts) ->
   $scope.init = ->
-    @service = new Contacts()
     $scope.viewing = false
     $scope.editing = false
-    $scope.contacts = @service.all()
+    $scope.contacts = Contacts.query()
 
   $scope.newContact = ->
     $scope.showEditor()
 
   $scope.save = (contact) ->
     saved = if contact.id
-      @service.update(contact)
+      contact.$update {}, ->
+        $scope.contact = contact
+        $scope.showContact(contact)
     else
-      saved = @service.create(contact)
-      $scope.contacts.push saved
-      saved
+      newContact = new Contacts(contact)
+      newContact.$save (c) ->
+        $scope.contacts.push c
+        $scope.showContact(c)
 
-    $scope.showContact(saved)
 
   $scope.showEditor = (contact) ->
     $scope.viewing = false

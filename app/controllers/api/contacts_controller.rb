@@ -1,5 +1,6 @@
 class Api::ContactsController < ApplicationController
   respond_to :json
+  wrap_parameters exclude: [] # allows full_name to pass through wrap_parameters
 
   def index
     respond_with Contact.alphabetical
@@ -10,7 +11,7 @@ class Api::ContactsController < ApplicationController
   end
 
   def update
-    respond_with Contact.update params[:id], safe_params
+    respond_with Contact.update(params[:id], safe_params)
   end
 
   private
