@@ -80,7 +80,7 @@ describe "ContactControl", ->
         expect(text).toEqual("Bu...")
 
     describe "shows errors", ->
-      it "on update", ->
+      it "on update w/o email", ->
         dummy = @scope.contacts[0]
         dummy.id = 7
         @scope.save dummy
@@ -91,7 +91,7 @@ describe "ContactControl", ->
         expect(@scope).toBeEditing()
         expect(@scope.errorMessage).toEqual "Email can't be blank."
 
-      it "on save", ->
+      it "on save w/o email", ->
         dummy = { "full_name": "Jimothy Halpert"}
         @scope.save dummy
 
@@ -100,6 +100,5 @@ describe "ContactControl", ->
 
         expect(@scope).toBeEditing()
         expect(@scope.errorMessage).toEqual "Email can't be blank."
-
-
+        expect(@scope.contacts.length).toEqual 2
 
