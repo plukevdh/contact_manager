@@ -79,5 +79,27 @@ describe "ContactControl", ->
         expect(text.length).toEqual(5)
         expect(text).toEqual("Bu...")
 
+    describe "shows errors", ->
+      it "on update", ->
+        dummy = @scope.contacts[0]
+        dummy.id = 7
+        @scope.save dummy
+
+        @http.whenPUT("/api/contacts/7").respond(422, {"errors": {"email": ["can't be blank"]}})
+        @http.flush()
+
+        expect(@scope).toBeEditing()
+        expect(@scope.errorMessage).toEqual "Email can't be blank."
+
+      it "on save", ->
+        dummy = { "full_name": "Jimothy Halpert"}
+        @scope.save dummy
+
+        @http.whenPOST("/api/contacts").respond(422, {"errors": {"email": ["can't be blank"]}})
+        @http.flush()
+
+        expect(@scope).toBeEditing()
+        expect(@scope.errorMessage).toEqual "Email can't be blank."
+
 
 

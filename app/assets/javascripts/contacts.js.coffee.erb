@@ -17,19 +17,40 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.editing = false
     $scope.contacts = Contacts.query()
 
+  capitalize = (str) ->
+    str.charAt(0).toUpperCase() + str.slice(1)
+
+  formatErrors = (errors) ->
+    all = for field, error of errors.errors
+      "#{capitalize(field)} #{error}."
+
+    all.join("<br/>")
+
+  $scope.displayErrors = (response) ->
+    $scope.errorMessage = formatErrors(response.data)
+    $scope.editing = true
+    $scope.viewing = false
+
   $scope.newContact = ->
     $scope.showEditor()
 
   $scope.save = (contact) ->
     saved = if contact.id
-      contact.$update {}, ->
-        $scope.contact = contact
-        $scope.showContact(contact)
+      contact.$update {},
+        ->
+          $scope.contact = contact
+          $scope.showContact(contact)
+        $scope.displayErrors
     else
       newContact = new Contacts(contact)
-      newContact.$save (c) ->
-        $scope.contacts.push c
-        $scope.showContact(c)
+      newContact.$save {},
+        (c) ->
+          $scope.contacts.push c
+          $scope.showContact(c)
+        $scope.displayErrors
+
+  $scope.clearErrors = ->
+    $scope.errorMessage = null
 
   $scope.showEditor = (contact) ->
     $scope.viewing = false

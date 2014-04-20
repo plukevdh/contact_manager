@@ -1,3 +1,7 @@
+<div id="errors" class="alert alert-danger alert-dismissable" ng-if="errorMessage">
+  <button type="button" class="close" aria-hidden="true" ng-click="clearErrors()">&times;</button>
+  {{errorMessage}}
+</div>
 <div id="name">
   <input type="text" ng-show="editing" ng-model="contact.full_name" placeholder="Contact Name">
   <div ng-hide="editing">
