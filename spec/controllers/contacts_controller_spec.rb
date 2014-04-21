@@ -5,7 +5,18 @@ describe Api::ContactsController do
 
   context "get index" do
     When { get :index, format: :json }
-    Then { expect(json_response.size).to eq(3) }
+
+    context "responds with all records as json" do
+      Then { expect(json_response.size).to eq(3) }
+    end
+
+    context "returns records alphabetically by last then first name" do
+      Given { create :contact, { full_name: "Admiral Ackbar" }}
+      Given { create :contact, { full_name: "Derek Zoolander" }}
+
+      Then { expect(json_response.first["last_name"]).to eq("Ackbar") }
+      And { expect(json_response.last["last_name"]).to eq("Zoolander") }
+    end
   end
 
   context "get index json" do
