@@ -30,7 +30,7 @@ describe Contact do
       And { contact.postcode.should == 12345 }
     end
 
-    context "should allow addresses with missinginfo" do
+    context "should allow addresses with missing info" do
       When(:contact) { build(:contact, address: {street: "123 Homily Street"}) }
       Then { expect(contact).to be_valid }
       And { expect(contact.postcode).to be_nil }
@@ -59,10 +59,15 @@ describe Contact do
       And { contact.errors[:email].should_not be_nil }
     end
 
-    context "require 4 digit postcode" do
+    context "require 5 digit postcode if given" do
       When { contact.postcode = "1234" }
       Then { contact.should_not be_valid }
       And { contact.errors[:postcode].should_not be_nil }
+    end
+
+    context "allow nil zip" do
+      When { contact.postcode = nil }
+      Then { contact.should be_valid }
     end
   end
 
