@@ -11,24 +11,24 @@
 </div>
 
 <div class="row">
-  <div class="picture col-lg-3"><i class="fa fa-user"></i></div>
-  <div class="info col-lg-9">
+  <div class="picture col-lg-1"><i class="fa fa-user"></i></div>
+  <div class="info col-lg-6">
     <div class="personal row">
-      <div class="col-lg-4">
+      <div class="col-sm-4">
         <label for="sex">Sex</label>
         <span id="sex" ng-hide="editing">{{capitalize(contact.sex)}}</span>
         <select name="sex" ng-show="editing" ng-model="contact.sex" ng-options='option.value as option.name for option in sexes'></select>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-sm-4">
         <label for="age">Age</label>
-        <editable-field ng-model="contact.age" id="age" placeholder="" size="2"></editable-field>
+        <editable-field ng-model="contact.age" id="age" placeholder="27" size="2"></editable-field>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-sm-4">
         <label for="birthday">Birthday</label>
         <span id="birthday" ng-hide="editing">{{formatDate(contact.birthday)}}</span>
-        <input name="birthday" class="birthdayField" type="text" ng-model="contact.birthday" ng-show="editing">
+        <input name="birthday" placeholder="mm/dd/yyyy" class="birthdayField" type="text" ng-model="contact.birthday" ng-show="editing">
         <!-- <editable-field ng-model="contact.birthday" id="birthday" class="birthdayField" placeholder="/14/2010"></editable-field> -->
       </div>
     </div>
@@ -47,11 +47,11 @@
     </div>
 
     <div class="contact row">
-      <div class="col-lg-6">
+      <div class="col-sm-6">
         <label for="phone">Phone</label>
         <editable-field ng-model="contact.phone" id="phone" placeholder="777-777-7777"></editable-field>
       </div>
-      <div class="col-lg-6">
+      <div class="col-sm-6">
         <label for="email">Email</label>
         <editable-field ng-model="contact.email" id="email" placeholder="john@example.com"></editable-field>
       </div>
