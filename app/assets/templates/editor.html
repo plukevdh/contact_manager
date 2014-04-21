@@ -10,57 +10,71 @@
   </div>
 </div>
 
-<div class="picture"></div>
-<div class="info">
-  <div class="personal">
-    <label for="sex">Sex</label>
-    <span id="sex" ng-hide="editing">{{contact.sex}}</span>
-    <select name="sex" ng-show="editing" ng-model="contact.sex">
-      <option>Please Select</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
+<div class="row">
+  <div class="picture col-lg-3"><i class="fa fa-user"></i></div>
+  <div class="info col-lg-9">
+    <div class="personal row">
+      <div class="col-lg-4">
+        <label for="sex">Sex</label>
+        <span id="sex" ng-hide="editing">{{contact.sex}}</span>
+        <select name="sex" ng-show="editing" ng-model="contact.sex" ng-selected="0">
+          <option value="none">Please Select</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
 
-    <label for="age">Age</label>
-    <span id="age" ng-hide="editing">{{contact.age}}</span>
-    <input name="age" type="text" ng-model="contact.age" ng-show="editing">
+      <div class="col-lg-4">
+        <label for="age">Age</label>
+        <span id="age" ng-hide="editing">{{contact.age}}</span>
+        <input name="age" size="2" type="text" ng-model="contact.age" ng-show="editing">
+      </div>
 
-    <label for="birthday">Birthday</label>
-    <span id="birthday" ng-hide="editing">{{contact.birthday}}</span>
-    <input name="birthday" type="text" ng-model="contact.birthday" ng-show="editing">
-  </div>
+      <div class="col-lg-4">
+        <label for="birthday">Birthday</label>
+        <span id="birthday" ng-hide="editing">{{formatDate(contact.birthday)}}</span>
+        <input name="birthday" class="birthdayField" type="text" ng-model="contact.birthday" ng-show="editing">
+      </div>
+    </div>
 
-  <div class="address">
-    <label for="street">Street</label>
-    <span id="street" ng-hide="editing">{{contact.street}}</span>
-    <input name="street" type="text" ng-model="contact.street" ng-show="editing">
+    <div class="address row">
+      <div class="col-lg-12">
+      <label>Address</label>
+      <span id="street" ng-hide="editing">{{contact.street}}</span>
+      <input name="street" type="text" ng-model="contact.street" ng-show="editing">
 
-    <label for="city">City</label>
-    <span id="city" ng-hide="editing">{{contact.city}}</span>
-    <input name="city" type="text" ng-model="contact.city" ng-show="editing">
+      <div>
+        <span id="city" ng-hide="editing">{{contact.city}}</span>
+        <input name="city" type="text" ng-model="contact.city" ng-show="editing">
 
-    <label for="state">State</label>
-    <span id="state" ng-hide="editing">{{contact.state}}</span>
-    <input name="state" type="text" ng-model="contact.state" ng-show="editing">
+        <span id="state" ng-hide="editing">{{contact.state}}</span>
+        <input name="state" type="text" ng-model="contact.state" ng-show="editing">
 
-    <label for="postcode">Zip</label>
-    <span id="postcode" ng-hide="editing">{{contact.postcode}}</span>
-    <input name="postcode" type="text" ng-model="contact.postcode" ng-show="editing">
-  </div>
+        <span id="postcode" ng-hide="editing">{{contact.postcode}}</span>
+        <input name="postcode" type="text" ng-model="contact.postcode" ng-show="editing">
+      </div>
+      </div>
+    </div>
 
-  <div class="contact">
-    <label for="phone">Phone</label>
-    <span id="phone" ng-hide="editing">{{contact.phone}}</span>
-    <input name="phone" type="text" ng-model="contact.phone" ng-show="editing">
+    <div class="contact row">
+      <div class="col-lg-6">
+        <label for="phone">Phone</label>
+        <span id="phone" ng-hide="editing">{{contact.phone}}</span>
+        <input name="phone" type="text" ng-model="contact.phone" ng-show="editing">
+      </div>
+      <div class="col-lg-6">
+        <label for="email">Email</label>
+        <span id="email" ng-hide="editing">{{contact.email}}</span>
+        <input name="email" type="text" ng-model="contact.email" ng-show="editing">
+      </div>
+    </div>
 
-    <label for="email">Email</label>
-    <span id="email" ng-hide="editing">{{contact.email}}</span>
-    <input name="email" type="text" ng-model="contact.email" ng-show="editing">
-  </div>
-
-  <div class="save">
-    <button class="btn btn-success" ng-show="editing" ng-click="save(contact)">
-      Save Contact
-    </button>
+    <div class="row">
+      <div class="save col-lg-3">
+        <button class="btn btn-success" ng-show="editing" ng-click="save(contact)">
+          Save Contact
+        </button>
+      </div>
+    </div>
   </div>
 </div>
