@@ -17,7 +17,7 @@
       <div class="col-lg-4">
         <label for="sex">Sex</label>
         <span id="sex" ng-hide="editing">{{contact.sex}}</span>
-        <select name="sex" ng-show="editing" ng-model="contact.sex" ng-selected="0">
+        <select name="sex" ng-show="editing" ng-model="contact.sex" ng-selected="none">
           <option value="none">Please Select</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -26,46 +26,38 @@
 
       <div class="col-lg-4">
         <label for="age">Age</label>
-        <span id="age" ng-hide="editing">{{contact.age}}</span>
-        <input name="age" size="2" type="text" ng-model="contact.age" ng-show="editing">
+        <editable-field ng-model="contact.age" id="age" placeholder="" size="2"></editable-field>
       </div>
 
       <div class="col-lg-4">
         <label for="birthday">Birthday</label>
         <span id="birthday" ng-hide="editing">{{formatDate(contact.birthday)}}</span>
         <input name="birthday" class="birthdayField" type="text" ng-model="contact.birthday" ng-show="editing">
+        <!-- <editable-field ng-model="contact.birthday" id="birthday" class="birthdayField" placeholder="/14/2010"></editable-field> -->
       </div>
     </div>
 
     <div class="address row">
       <div class="row">
         <label>Address</label>
-        <span id="street" ng-hide="editing">{{contact.street}}</span>
-        <input name="street" type="text" placeholder="street" ng-model="contact.street" ng-show="editing">
+        <editable-field ng-model="contact.street" id="street"></editable-field>
       </div>
 
       <div class="row">
-        <span id="city" ng-hide="editing">{{contact.city}}</span>
-        <input name="city" type="text" size="10" placeholder="city" ng-model="contact.city" ng-show="editing">
-
-        <span id="state" ng-hide="editing">{{contact.state}}</span>
-        <input name="state" type="text" placeholder="state" size="2" ng-model="contact.state" ng-show="editing">
-
-        <span id="postcode" ng-hide="editing">{{contact.postcode}}</span>
-        <input name="postcode" type="text" size="5" placeholder="zip" ng-model="contact.postcode" ng-show="editing">
+        <editable-field ng-model="contact.city" id="city" size="10"></editable-field>
+        <editable-field ng-model="contact.state" id="state" size="2"></editable-field>
+        <editable-field ng-model="contact.postcode" placeholder="zip" id="postcode" size="5"></editable-field>
       </div>
     </div>
 
     <div class="contact row">
       <div class="col-lg-6">
         <label for="phone">Phone</label>
-        <span id="phone" ng-hide="editing">{{contact.phone}}</span>
-        <input name="phone" type="text" ng-model="contact.phone" ng-show="editing">
+        <editable-field ng-model="contact.phone" id="phone" placeholder="777-777-7777"></editable-field>
       </div>
       <div class="col-lg-6">
         <label for="email">Email</label>
-        <span id="email" ng-hide="editing">{{contact.email}}</span>
-        <input name="email" type="text" ng-model="contact.email" ng-show="editing">
+        <editable-field ng-model="contact.email" id="email" placeholder="john@example.com"></editable-field>
       </div>
     </div>
 

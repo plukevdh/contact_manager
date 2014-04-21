@@ -1,5 +1,6 @@
 #= require "moment.min"
 #= depend_on_asset "editor.html"
+#= depend_on_asset "editable_field.html"
 
 ContactApp = angular.module('ContactApp', ['ngResource'])
 DATE_FORMAT = "M/D/YYYY"
@@ -80,8 +81,9 @@ ContactApp.directive 'editor', () ->
   templateUrl: '/assets/editor.html'
 
 ContactApp.directive 'birthdayField', () ->
-  require: '^ngModel',
-  restrict: 'C',
+  require: '^ngModel'
+  transclude: false
+  restrict: 'C'
   link: (scope, elm, attrs, ctrl) ->
     attrs.$observe 'birthdayField', (newValue) ->
       ctrl.$modelValue = new Date(ctrl.$setViewValue)
@@ -93,3 +95,13 @@ ContactApp.directive 'birthdayField', () ->
     ctrl.$parsers.unshift (viewValue) ->
       date = moment(viewValue)
       if (date && date.isValid()) then date.toDate() else ""
+
+ContactApp.directive 'editableField', ($compile) ->
+  require: '^ngModel'
+  restrict: "E"
+  templateUrl: "/assets/editable_field.html"
+  scope:
+    ngModel: '='
+    size: "@"
+    placeholder: "@"
+    id: "@"
