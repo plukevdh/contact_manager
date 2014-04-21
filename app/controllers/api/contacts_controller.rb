@@ -7,11 +7,11 @@ class Api::ContactsController < ApplicationController
   end
 
   def create
-    respond_with Contact.create safe_params
+    respond_with Contact.create(safe_params), location: nil
   end
 
   def update
-    respond_with Contact.update(params[:id], safe_params)
+    respond_with Contact.update(params[:id], safe_params), location: nil
   end
 
   private
