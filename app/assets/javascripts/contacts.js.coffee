@@ -21,6 +21,7 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.contacts = Contacts.query()
 
   $scope.capitalize = (str) ->
+    return "" unless angular.isString(str)
     str.charAt(0).toUpperCase() + str.slice(1)
 
   formatErrors = (errors) ->

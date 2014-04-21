@@ -64,6 +64,16 @@ describe "ContactControl", ->
         expect(@scope).toBeViewing()
         expect(@scope.contacts.length).toEqual 2
 
+    describe "capitalize", ->
+      it "capitalizes string", ->
+        expect(@scope.capitalize("my new name")).toEqual("My new name")
+
+      it "ignores null", ->
+        expect(@scope.capitalize(null)).toEqual("")
+
+      it "ignores empty", ->
+        expect(@scope.capitalize("")).toEqual("")
+
     describe "truncate", ->
       dummy = null
       beforeEach ->
