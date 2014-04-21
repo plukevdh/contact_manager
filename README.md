@@ -16,8 +16,8 @@
 
 I chose to use the Angular framework for the front end for a number of reasons:
 
-1. Simple two-way binding was desirable with the menu on the left and the contact page on the right.
-2. Angular does service design very cleanly and makes it incredibly easy to write and test
+1. Simple two-way binding was desirable with the menu on the left and the contact page on the right. Keeping all the state for so many variables can get tricky.
+2. Angular does service design very cleanly and makes it incredibly easy to write and test.
 3. Rails `respond_to/with` makes sending the model data to angular's `$resource` services pretty much a one-liner for server and client-side integration.
 4. Angular is a newer framework for me and this was a good problem to help me dig deeper.
 
