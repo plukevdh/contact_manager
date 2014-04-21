@@ -12,6 +12,14 @@
 - `rake db:migrate`
 - `rake db:test:prepare` (though seems to be deprecated for 4.x)
 
+
+## Run tests
+
+- `rspec` - Rails tests
+- `rake jasmine:ci` - JS tests
+
+Alternatively, you can just run `rake jasmine` and open `localhost:8888` to view the jasmine specs.
+
 ## Notes
 
 I chose to use the Angular framework for the front end for a number of reasons:
