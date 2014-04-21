@@ -16,12 +16,8 @@
     <div class="personal row">
       <div class="col-lg-4">
         <label for="sex">Sex</label>
-        <span id="sex" ng-hide="editing">{{contact.sex}}</span>
-        <select name="sex" ng-show="editing" ng-model="contact.sex" ng-selected="none">
-          <option value="none">Please Select</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+        <span id="sex" ng-hide="editing">{{capitalize(contact.sex)}}</span>
+        <select name="sex" ng-show="editing" ng-model="contact.sex" ng-options='option.value as option.name for option in sexes'></select>
       </div>
 
       <div class="col-lg-4">

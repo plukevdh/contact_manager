@@ -20,14 +20,19 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.editing = false
     $scope.contacts = Contacts.query()
 
-  capitalize = (str) ->
+  $scope.capitalize = (str) ->
     str.charAt(0).toUpperCase() + str.slice(1)
 
   formatErrors = (errors) ->
     all = for field, error of errors.errors
-      "#{capitalize(field)} #{error}."
+      "#{$scope.capitalize(field)} #{error}."
 
     all.join("<br/>")
+
+  $scope.sexes = [
+    { name: "Male", value: "male" }
+    { name: "Female", value: "female" }
+  ]
 
   $scope.displayErrors = (response) ->
     $scope.errorMessage = formatErrors(response.data)
