@@ -1,6 +1,8 @@
+#= require "moment.min"
 #= depend_on_asset "editor.html"
 
 ContactApp = angular.module('ContactApp', ['ngResource'])
+DATE_FORMAT = "M/D/YYYY"
 
 ContactApp.config ($httpProvider) ->
   authToken = $("meta[name=\"csrf-token\"]").attr("content")
@@ -35,6 +37,9 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.showEditor()
 
   $scope.save = (contact) ->
+    # normalize birthday for rails
+    $scope.clearErrors()
+
     saved = if contact.id
       contact.$update {},
         ->
@@ -66,6 +71,25 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     return string if string.length <= max
     string.substring(0, max-3) + "..."
 
+  $scope.formatDate = (date) ->
+    return if date == "" || date == null
+    moment(date).format(DATE_FORMAT)
+
 ContactApp.directive 'editor', () ->
   restrict: 'E',
-  templateUrl: '<%= asset_path("editor.html") %>'
+  templateUrl: '/assets/editor.html'
+
+ContactApp.directive 'birthdayField', () ->
+  require: '^ngModel',
+  restrict: 'C',
+  link: (scope, elm, attrs, ctrl) ->
+    attrs.$observe 'birthdayField', (newValue) ->
+      ctrl.$modelValue = new Date(ctrl.$setViewValue)
+
+    ctrl.$formatters.unshift (modelValue) ->
+      return "" unless modelValue
+      moment(modelValue).format(DATE_FORMAT)
+
+    ctrl.$parsers.unshift (viewValue) ->
+      date = moment(viewValue)
+      if (date && date.isValid()) then date.toDate() else ""

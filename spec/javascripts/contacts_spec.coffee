@@ -79,6 +79,10 @@ describe "ContactControl", ->
         expect(text.length).toEqual(5)
         expect(text).toEqual("Bu...")
 
+    it "can format dates", ->
+      text = @scope.formatDate("1964-01-04")
+      expect(text).toEqual("1/4/1964")
+
     describe "shows errors", ->
       it "on update w/o email", ->
         dummy = @scope.contacts[0]
