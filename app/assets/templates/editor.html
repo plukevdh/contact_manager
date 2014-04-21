@@ -38,21 +38,21 @@
     </div>
 
     <div class="address row">
-      <div class="col-lg-12">
-      <label>Address</label>
-      <span id="street" ng-hide="editing">{{contact.street}}</span>
-      <input name="street" type="text" ng-model="contact.street" ng-show="editing">
+      <div class="row">
+        <label>Address</label>
+        <span id="street" ng-hide="editing">{{contact.street}}</span>
+        <input name="street" type="text" placeholder="street" ng-model="contact.street" ng-show="editing">
+      </div>
 
-      <div>
+      <div class="row">
         <span id="city" ng-hide="editing">{{contact.city}}</span>
-        <input name="city" type="text" ng-model="contact.city" ng-show="editing">
+        <input name="city" type="text" size="10" placeholder="city" ng-model="contact.city" ng-show="editing">
 
         <span id="state" ng-hide="editing">{{contact.state}}</span>
-        <input name="state" type="text" ng-model="contact.state" ng-show="editing">
+        <input name="state" type="text" placeholder="state" size="2" ng-model="contact.state" ng-show="editing">
 
         <span id="postcode" ng-hide="editing">{{contact.postcode}}</span>
-        <input name="postcode" type="text" ng-model="contact.postcode" ng-show="editing">
-      </div>
+        <input name="postcode" type="text" size="5" placeholder="zip" ng-model="contact.postcode" ng-show="editing">
       </div>
     </div>
 
