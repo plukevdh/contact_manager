@@ -58,10 +58,11 @@
     </div>
 
     <div class="row">
-      <div class="save col-lg-3">
-        <button class="btn btn-success" ng-show="editing" ng-click="save(contact)">
+      <div class="save col-lg-3" ng-show="editing">
+        <button class="btn btn-success"  ng-click="save(contact)">
           Save Contact
         </button>
+        <a href="#cancel" ng-click="cancel()">Cancel</a>
       </div>
     </div>
   </div>

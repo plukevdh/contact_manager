@@ -65,6 +65,7 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.errorMessage = null
 
   $scope.showEditor = (contact) ->
+    $scope.pristine = angular.copy(contact)
     $scope.viewing = false
     $scope.editing = true
     $scope.contact = contact
@@ -73,6 +74,9 @@ ContactApp.controller 'ContactControl', ($scope, Contacts) ->
     $scope.viewing = true
     $scope.editing = false
     $scope.contact = contact
+
+  $scope.cancel = () ->
+    $scope.showContact($scope.pristine)
 
   $scope.truncate = (string, max) ->
     return string if string.length <= max

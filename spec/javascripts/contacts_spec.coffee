@@ -42,6 +42,15 @@ describe "ContactControl", ->
       expect(@scope).toBeEditing()
       expect(@scope.contact).toEqual dummy
 
+    it "allows us to cancel editing", ->
+      @scope.showEditor(dummy)
+
+      expect(@scope).toBeEditing()
+
+      @scope.cancel()
+      expect(@scope).not.toBeEditing()
+      expect(@scope.contact).toEqual(dummy)
+
     describe "save", ->
       it "should save a new record", ->
         dummy = {full_name: "Bob Dylan", email: "bd@music.com"}
