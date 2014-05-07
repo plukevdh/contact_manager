@@ -52,6 +52,18 @@ describe Contact do
       Then { contact.should_not be_valid }
     end
 
+    context "requires valid email" do
+      When { contact.email = "test@example.com" }
+      Then { contact.should be_valid }
+    end
+
+    context "rejects invalid email" do
+      When { contact.email = "test@example" }
+      Then { contact.should_not be_valid }
+      And { contact.errors[:email].should_not be_nil }
+      And { contact.errors[:email].first.should match("requires a valid email address") }
+    end
+
     context "require unique emails" do
       Given!(:other) { create(:contact, email: "biz@stone.com") }
       When { contact.email = "biz@stone.com" }

@@ -1,5 +1,7 @@
 class Contact < ActiveRecord::Base
-  validates :email, presence: true, uniqueness: true, allow_blank: false
+  validates :email, presence: true, uniqueness: true, allow_blank: false, format: {
+    with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/,
+    message: "requires a valid email address" }
   validates :postcode, length: { is: 5 }, allow_nil: true
 
   scope :alphabetical, -> { order(:last_name, :first_name) }
